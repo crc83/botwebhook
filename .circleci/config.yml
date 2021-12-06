@@ -11,7 +11,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ checksum "build.gradle" }}
             # Perform a Partial Cache Restore (https://circleci.com/docs/2.0/caching/#restoring-cache)
             - v1-dependencies-
       - run:
@@ -30,7 +30,7 @@ jobs:
           command: 'chmod +x gradlew'
       - run:
           name: Verify with Prod Profile
-          command: './gradlew bootJar -Pprod -x test jibDockerBuild --no-daemon'
+          command: './gradlew bootJar -Pprod -x test --no-daemon'
       - gcp-cli/initialize
       - run:
           name: Tag docker image
@@ -48,4 +48,4 @@ jobs:
       - run:
           name: Deploy docker image to GCP
           command:
-            gcloud run deploy schedulify --image=gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$TAG --allow-unauthenticated --timeout=3600 --memory=512Mi --platform=managed --region=${GOOGLE_COMPUTE_REGION} --project=${GOOGLE_PROJECT_ID} --min-instances=1 --max-instances=1 --port=8080  --set-secrets=SCHEDULIFY_TELEGRAM_BOT_NAME=SCHEDULIFY_TEST_TELEGRAM_BOT_NAME:latest,SCHEDULIFY_TELEGRAM_BOT_TOKEN=SCHEDULIFY_TEST_TELEGRAM_BOT_TOKEN:latest 
+            gcloud run deploy botwebhook --image=gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$TAG --allow-unauthenticated --timeout=3600 --memory=512Mi --platform=managed --region=${GOOGLE_COMPUTE_REGION} --project=${GOOGLE_PROJECT_ID} --min-instances=1 --max-instances=1 --port=8080  --set-secrets=SCHEDULIFY_TELEGRAM_BOT_NAME=SCHEDULIFY_TEST_TELEGRAM_BOT_NAME:latest,SCHEDULIFY_TELEGRAM_BOT_TOKEN=SCHEDULIFY_TEST_TELEGRAM_BOT_TOKEN:latest 

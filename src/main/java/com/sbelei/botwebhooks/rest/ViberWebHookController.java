@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,7 +90,13 @@ public class ViberWebHookController {
     }
 
     @PostMapping("/receive")
-    public ResponseEntity<String> handleIncomingMessage(@RequestBody IncomingEvent incomingMessage)  {
+    public ResponseEntity<String> handleIncomingMessage(@RequestBody Optional<IncomingEvent> incomingMessageOptional)  {
+        if (!incomingMessageOptional.isPresent()) {
+            LOG.info("No incoming content");
+            ResponseEntity.ok("No incoming content");
+        }
+
+        IncomingEvent incomingMessage = incomingMessageOptional.get();
         LOG.info("Received incoming event:"+incomingMessage.toString());
         if (!"message".equals(incomingMessage.getEvent())) {
             return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());

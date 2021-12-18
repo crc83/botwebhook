@@ -3,4 +3,5 @@
 
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.zalando.logbook" level="trace" />
+    <logger name="com.sbelei.botwebhooks" level="INFO" />
 </configuration>

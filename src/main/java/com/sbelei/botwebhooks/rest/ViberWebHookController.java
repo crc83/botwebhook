@@ -89,7 +89,7 @@ public class ViberWebHookController {
         }
     }
 
-    @PostMapping("/receive")
+    @RequestMapping("/receive")
     public ResponseEntity<String> handleIncomingMessage(@RequestBody Optional<IncomingEvent> incomingMessageOptional)  {
         if (!incomingMessageOptional.isPresent()) {
             LOG.info("No incoming content");

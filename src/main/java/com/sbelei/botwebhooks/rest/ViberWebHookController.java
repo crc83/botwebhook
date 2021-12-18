@@ -1,7 +1,7 @@
 package com.sbelei.botwebhooks.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbelei.botwebhooks.rest.viber.request.message.IncomingMessageRequest;
+import com.sbelei.botwebhooks.rest.viber.request.message.IncomingEvent;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.EventType;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.SetWebhookRequest;
 import okhttp3.MediaType;
@@ -50,14 +50,14 @@ public class ViberWebHookController {
 
     private String registerViberBot() throws IOException {
         SetWebhookRequest request =  new SetWebhookRequest();
-        request.setUrl("https://bots.schedulify.com.ua/viber/defaultrecieve");
+        request.setUrl("https://bots.schedulify.com.ua/viber/receive");
         request.setEvent_types( new EventType[] {
-                EventType.SEEN,
-                EventType.CONVERSATION_STARTED,
-                EventType.DELIVERED,
-                EventType.FAILED,
-                EventType.SUBSCRIBED,
-                EventType.UNSUBSCRIBED
+                EventType.seen,
+                EventType.conversation_started,
+                EventType.delivered,
+                EventType.failed,
+                EventType.subscribed,
+                EventType.unsubscribed
         });
         request.setSend_name(true);
         request.setSend_photo(true);
@@ -89,8 +89,11 @@ public class ViberWebHookController {
     }
 
     @PostMapping("/receive")
-    public ResponseEntity<String> handleIncomingMessage(@RequestBody IncomingMessageRequest incomingMessage)  {
-        LOG.info("Received incoming message:"+incomingMessage.toString());
+    public ResponseEntity<String> handleIncomingMessage(@RequestBody IncomingEvent incomingMessage)  {
+        LOG.info("Received incoming event:"+incomingMessage.toString());
+        if (!"message".equals(incomingMessage.getEvent())) {
+            return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
+        }
         String userId = incomingMessage.getSender().getId();
         if (isUserKnown(userId)) {
             //then handle regular conversation via commands

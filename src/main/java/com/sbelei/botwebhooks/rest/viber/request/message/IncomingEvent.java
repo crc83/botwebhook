@@ -1,6 +1,6 @@
 package com.sbelei.botwebhooks.rest.viber.request.message;
 
-public class IncomingMessageRequest {
+public class IncomingEvent {
 
     private String event;
     private String timestamp;

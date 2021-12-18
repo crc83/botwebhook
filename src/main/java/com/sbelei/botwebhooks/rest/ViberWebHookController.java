@@ -1,11 +1,24 @@
 package com.sbelei.botwebhooks.rest;
 
-import com.sbelei.botwebhooks.rest.viber.request.IncomingMessageRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sbelei.botwebhooks.rest.viber.request.message.IncomingMessageRequest;
+import com.sbelei.botwebhooks.rest.viber.request.setwebhook.EventType;
+import com.sbelei.botwebhooks.rest.viber.request.setwebhook.SetWebhookRequest;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,31 +33,59 @@ public class ViberWebHookController {
     private static Map<String, String> knownUsers = new HashMap<>();
     private static Set<String> usersWeWaitForPhoneNumber = new HashSet<>();
 
+    @Value("${viber.bot_token}")
+    private String viberBotTokenId;
+
     @GetMapping("/reregister")
     public ResponseEntity<String> reRegister() {
-        registerViberBot();
-        return ResponseEntity.ok("registred");
+        String response = "";
+        try {
+            response = registerViberBot();
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = "Error";
+        }
+        return ResponseEntity.ok(response);
     }
 
-    private void registerViberBot() {
+    private String registerViberBot() throws IOException {
+        SetWebhookRequest request =  new SetWebhookRequest();
+        request.setUrl("https://bots.schedulify.com.ua/viber/defaultrecieve");
+        request.setEvent_types( new EventType[] {
+                EventType.SEEN,
+                EventType.CONVERSATION_STARTED,
+                EventType.DELIVERED,
+                EventType.FAILED,
+                EventType.SUBSCRIBED,
+                EventType.UNSUBSCRIBED
+        });
+        request.setSend_name(true);
+        request.setSend_photo(true);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(request);
         //https://chatapi.viber.com/pa/set_webhook
-        // TODO : Add lib for HTTP request (okHTTP)
-        // TODO : Add library for JSONs
-//        """
-//                            {
-//                               "url":"https://bots.schedulify.com.ua/viber/receive",
-//                               "event_types":[
-//                                  "delivered",
-//                                  "seen",
-//                                  "failed",
-//                                  "subscribed",
-//                                  "unsubscribed",
-//                                  "conversation_started"
-//                               ],
-//                               "send_name": true,
-//                               "send_photo": true
-//                            }
-//"""
+
+        //defaultrecieve
+        return post("https://chatapi.viber.com/pa/set_webhook", json);
+    }
+
+    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+    OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor())
+            .build();
+
+    String post(String url, String json) throws IOException {
+        okhttp3.RequestBody body = okhttp3.RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("X-Viber-Auth-Token",viberBotTokenId)
+                .post(body)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     @PostMapping("/receive")
@@ -92,10 +133,10 @@ public class ViberWebHookController {
         Matcher matcher = pattern.matcher(possiblePhoneNumber);
         return matcher.matches();
     }
-    //Viber requires that we handle any request here and always return 200
-//    @RequestMapping("/receive")
-//    public ResponseEntity<String> receive() {
-//        //lets parse request to see if we can get
-//        return ResponseEntity.ok("Hello world");
-//    }
+
+    @RequestMapping("/defaultrecieve")
+    public ResponseEntity<String> receive() {
+        //lets parse request to see if we can get
+        return ResponseEntity.ok("ok");
+    }
 }

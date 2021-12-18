@@ -1,5 +1,8 @@
-package com.sbelei.botwebhooks.rest.viber.request;
+package com.sbelei.botwebhooks.rest.viber.request.message;
 
+/**
+ * Belongs to IncomingMessageRequest, hide it there
+ */
 public class Sender {
     private String id;
     private String name;

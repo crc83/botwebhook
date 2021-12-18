@@ -17,6 +17,18 @@ dependencies {
 	implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.16.0'
 	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j
 	implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: '2.16.0'
+	// https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2
+	implementation group: 'io.github.resilience4j', name: 'resilience4j-spring-boot2', version: '1.7.1'
+
+	//OK HTTP CLIENT
+	// define a BOM and its version
+	implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+	// define any required OkHttp artifacts without version
+	implementation("com.squareup.okhttp3:okhttp")
+	implementation("com.squareup.okhttp3:logging-interceptor")
+	//CUSTOM DEPENDENCIES ENDS HERE
+
+	// DEFAULT DEPENDENCIES STARTS HERE
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compileOnly group: 'org.zalando', name: 'logbook-api', version: '2.4.1'

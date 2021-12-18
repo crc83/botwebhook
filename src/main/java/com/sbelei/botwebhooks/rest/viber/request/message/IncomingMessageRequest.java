@@ -1,4 +1,4 @@
-package com.sbelei.botwebhooks.rest.viber.request;
+package com.sbelei.botwebhooks.rest.viber.request.message;
 
 public class IncomingMessageRequest {
 
@@ -68,7 +68,7 @@ public class IncomingMessageRequest {
 
     @Override
     public String toString() {
-        return "ViberIncomingMessageRequestDto{" +
+        return "IncomingMessageRequest{" +
                 "event='" + event + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", chat_hostname='" + chat_hostname + '\'' +

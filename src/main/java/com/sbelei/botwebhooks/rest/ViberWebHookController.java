@@ -101,7 +101,7 @@ public class ViberWebHookController {
         }
 
         IncomingEvent incomingMessage = incomingMessageOptional.get();
-        LOG.info("Received incoming event:"+incomingMessage);
+        LOG.info("Received incoming event:"+incomingMessage.toString());
         if (!"message".equals(incomingMessage.getEvent())) {
             return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
         }

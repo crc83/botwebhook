@@ -95,32 +95,37 @@ public class ViberWebHookController {
 
     @RequestMapping("/receive")
     public ResponseEntity<String> handleIncomingMessage(@RequestBody Optional<IncomingEvent> incomingMessageOptional)  {
-        if (incomingMessageOptional.isEmpty()) {
-            LOG.info("No incoming content");
-            return ResponseEntity.ok("No incoming content");
-        }
-
-        IncomingEvent incomingMessage = incomingMessageOptional.get();
-        LOG.info("Received incoming event:"+incomingMessage.toString());
-        if (!"message".equals(incomingMessage.getEvent())) {
-            return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
-        }
-        String userId = incomingMessage.getSender().getId();
-        if (isUserKnown(userId)) {
-            //then handle regular conversation via commands
-            sendMessage( userId, "Your phone number is :"+ knownUsers.get(userId));
-        } else if (isUserAskedForPhoneNumber(userId)) {
-            if (isPhoneNumberValid(incomingMessage.getMessage().getText())) {
-                saveUserPhoneNumber(userId, incomingMessage.getMessage().getText());
-            } else {
-                sendMessage( userId, "Phone number is invalid, please try again");
+        try {
+            if (incomingMessageOptional.isEmpty()) {
+                LOG.info("No incoming content");
+                return ResponseEntity.ok("No incoming content");
             }
-        } else {
-            sendMessage(userId, "Nice to meet you first time here");
-            sendMessage(userId, "To get most of the platform, please sent us your phone number you use during registration in a next message");
-            setUserAskedForPhoneNumber(userId);
+
+            IncomingEvent incomingMessage = incomingMessageOptional.get();
+            LOG.info("Received incoming event:" + incomingMessage.toString());
+            if (!"message".equals(incomingMessage.getEvent())) {
+                return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
+            }
+            String userId = incomingMessage.getSender().getId();
+            if (isUserKnown(userId)) {
+                //then handle regular conversation via commands
+                sendMessage(userId, "Your phone number is :" + knownUsers.get(userId));
+            } else if (isUserAskedForPhoneNumber(userId)) {
+                if (isPhoneNumberValid(incomingMessage.getMessage().getText())) {
+                    saveUserPhoneNumber(userId, incomingMessage.getMessage().getText());
+                } else {
+                    sendMessage(userId, "Phone number is invalid, please try again");
+                }
+            } else {
+                sendMessage(userId, "Nice to meet you first time here");
+                sendMessage(userId, "To get most of the platform, please sent us your phone number you use during registration in a next message");
+                setUserAskedForPhoneNumber(userId);
+            }
+            return ResponseEntity.ok("Incoming message parsed");
+        } catch (Exception e) {
+            LOG.error("Unexpected error", e);
+            return ResponseEntity.ok("Error:" + e.getMessage());
         }
-        return ResponseEntity.ok("Incoming message parsed");
     }
 
     private void saveUserPhoneNumber(String userId, String phoneNumber) {
@@ -149,8 +154,8 @@ public class ViberWebHookController {
                 "}";
         try {
             post("https://chatapi.viber.com/pa/send_message",messageJson);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOG.error("Error while sending message"  + e.getMessage(), e);
         }
     }
 

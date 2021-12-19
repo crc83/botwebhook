@@ -39,7 +39,7 @@ public class ViberWebHookController {
 
     @GetMapping("/reregister")
     public ResponseEntity<String> reRegister() {
-        String response = "";
+        String response;
         try {
             response = registerViberBot();
         } catch (Exception e) {
@@ -85,19 +85,23 @@ public class ViberWebHookController {
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            if ((response.body() != null)) {
+                return response.body().string();
+            } else {
+                return "";
+            }
         }
     }
 
     @RequestMapping("/receive")
     public ResponseEntity<String> handleIncomingMessage(@RequestBody Optional<IncomingEvent> incomingMessageOptional)  {
-        if (!incomingMessageOptional.isPresent()) {
+        if (incomingMessageOptional.isEmpty()) {
             LOG.info("No incoming content");
-            ResponseEntity.ok("No incoming content");
+            return ResponseEntity.ok("No incoming content");
         }
 
         IncomingEvent incomingMessage = incomingMessageOptional.get();
-        LOG.info("Received incoming event:"+incomingMessage.toString());
+        LOG.info("Received incoming event:"+incomingMessage);
         if (!"message".equals(incomingMessage.getEvent())) {
             return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
         }
@@ -132,6 +136,22 @@ public class ViberWebHookController {
     }
 
     private void sendMessage(String userId, String message) {
+        String messageJson = "{\n" +
+                "   \"receiver\":\""+userId+"==\",\n" +
+                "   \"min_api_version\":1,\n" +
+                "   \"sender\":{\n" +
+                "      \"name\":\"schedulify.com.ua\",\n" +
+                "      \"avatar\":\"http://avatar.example.com\"\n" +
+                "   },\n" +
+                "   \"tracking_data\":\"tracking data\",\n" +
+                "   \"type\":\""+message+"\",\n" +
+                "   \"text\":\"Im here\"\n" +
+                "}";
+        try {
+            post("https://chatapi.viber.com/pa/send_message",messageJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isUserKnown(String viberUserId) {

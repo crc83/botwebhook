@@ -73,8 +73,8 @@ public class IncomingEvent {
                 ", timestamp='" + timestamp + '\'' +
                 ", chat_hostname='" + chat_hostname + '\'' +
                 ", message_token='" + message_token + '\'' +
-                ", sender=" + sender.toString() +
-                ", message=" + message.toString() +
+                ", sender=" + sender!=null?sender.toString():"null" +
+                ", message=" + message!=null?message.toString():"null" +
                 ", silent=" + silent +
                 '}';
     }

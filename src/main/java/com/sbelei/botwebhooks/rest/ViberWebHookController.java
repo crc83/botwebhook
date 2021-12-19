@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sbelei.botwebhooks.rest.viber.request.message.IncomingEvent;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.EventType;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.SetWebhookRequest;
+import io.github.resilience4j.core.StringUtils;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -102,6 +103,7 @@ public class ViberWebHookController {
             }
 
             IncomingEvent incomingMessage = incomingMessageOptional.get();
+
             LOG.info("Received incoming event:" + incomingMessage.toString());
             if (!"message".equals(incomingMessage.getEvent())) {
                 return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());

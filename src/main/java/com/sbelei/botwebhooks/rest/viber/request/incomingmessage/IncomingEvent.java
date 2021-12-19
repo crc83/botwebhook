@@ -1,4 +1,4 @@
-package com.sbelei.botwebhooks.rest.viber.request.message;
+package com.sbelei.botwebhooks.rest.viber.request.incomingmessage;
 
 public class IncomingEvent {
 

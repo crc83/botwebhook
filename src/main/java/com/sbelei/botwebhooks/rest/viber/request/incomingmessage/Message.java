@@ -1,4 +1,4 @@
-package com.sbelei.botwebhooks.rest.viber.request.message;
+package com.sbelei.botwebhooks.rest.viber.request.incomingmessage;
 
 /**
  * Belongs to IncomingMessageRequest, hide it there

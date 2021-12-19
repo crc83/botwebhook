@@ -1,10 +1,9 @@
 package com.sbelei.botwebhooks.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbelei.botwebhooks.rest.viber.request.message.IncomingEvent;
+import com.sbelei.botwebhooks.rest.viber.request.incomingmessage.IncomingEvent;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.EventType;
 import com.sbelei.botwebhooks.rest.viber.request.setwebhook.SetWebhookRequest;
-import io.github.resilience4j.core.StringUtils;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -151,8 +149,8 @@ public class ViberWebHookController {
                 "      \"avatar\":\"http://avatar.example.com\"\n" +
                 "   },\n" +
                 "   \"tracking_data\":\"tracking data\",\n" +
-                "   \"type\":\""+message+"\",\n" +
-                "   \"text\":\"Im here\"\n" +
+                "   \"type\":\"text\",\n" +
+                "   \"text\":\""+message+"\"\n" +
                 "}";
         try {
             post("https://chatapi.viber.com/pa/send_message",messageJson);

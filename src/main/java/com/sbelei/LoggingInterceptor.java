@@ -1,4 +1,4 @@
-package com.sbelei.botwebhooks.rest;
+package com.sbelei;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-class LoggingInterceptor implements Interceptor {
+public class LoggingInterceptor implements Interceptor {
     private static final Logger LOG = LoggerFactory.getLogger(LoggingInterceptor.class);
 
     @Override public Response intercept(Interceptor.Chain chain) throws IOException {

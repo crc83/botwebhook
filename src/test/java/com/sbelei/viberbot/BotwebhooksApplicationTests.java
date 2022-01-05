@@ -1,4 +1,4 @@
-package com.sbelei.botwebhooks;
+package com.sbelei.viberbot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

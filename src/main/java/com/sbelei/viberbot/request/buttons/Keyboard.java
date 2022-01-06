@@ -1,9 +1,9 @@
 package com.sbelei.viberbot.request.buttons;
 
 public class Keyboard {
-    private String Type;
-    private boolean DefaultHeight;
-    private Button[] Buttons;
+    public String Type;
+    public boolean DefaultHeight;
+    public Button[] Buttons;
 
     public Keyboard() {
         Type = "keyboard";
@@ -12,23 +12,7 @@ public class Keyboard {
     }
 
     public Keyboard(Button... buttons) {
-        super();
-        Buttons = buttons;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public boolean isDefaultHeight() {
-        return DefaultHeight;
-    }
-
-    public Button[] getButtons() {
-        return Buttons;
-    }
-
-    public void setButtons(Button[] buttons) {
+        this();
         Buttons = buttons;
     }
 }

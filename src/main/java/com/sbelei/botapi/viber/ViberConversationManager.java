@@ -17,12 +17,12 @@ public class ViberConversationManager {
     private ViberHttpClient client;
 
     public void respondToEvent(IncomingEvent event) throws IOException {
-        if (conversations.containsKey(event.getSender().getId())) {
-            ViberConversationState conversation = conversations.get(event.getSender().getId());
+        if (conversations.containsKey(event.sender.id)) {
+            ViberConversationState conversation = conversations.get(event.sender.id);
             conversation.respondToEvent(client, event);
         } else {
             ViberConversationState newConversation = new ViberConversationState();
-            conversations.put(event.getSender().getId(), newConversation);
+            conversations.put(event.sender.id, newConversation);
             newConversation.startConversation(client, event);
         }
     }

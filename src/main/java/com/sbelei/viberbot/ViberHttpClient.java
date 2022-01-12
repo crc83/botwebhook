@@ -37,4 +37,8 @@ public class ViberHttpClient {
             }
         }
     }
+
+    public String send_message(String json) throws IOException {
+        return post("https://chatapi.viber.com/pa/send_message", json);
+    }
 }

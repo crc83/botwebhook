@@ -1,10 +1,10 @@
-package com.sbelei.viberbot;
+package com.sbelei.botapi.viber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbelei.viberbot.request.buttons.Button;
-import com.sbelei.viberbot.request.buttons.Keyboard;
-import com.sbelei.viberbot.request.buttons.KeyboardRequest;
-import com.sbelei.viberbot.request.incomingmessage.IncomingEvent;
+import com.sbelei.botapi.viber.request.buttons.Button;
+import com.sbelei.botapi.viber.request.buttons.Keyboard;
+import com.sbelei.botapi.viber.request.buttons.KeyboardRequest;
+import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 
 import java.io.IOException;
 

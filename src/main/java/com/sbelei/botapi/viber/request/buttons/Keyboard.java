@@ -1,4 +1,4 @@
-package com.sbelei.viberbot.request.buttons;
+package com.sbelei.botapi.viber.request.buttons;
 
 public class Keyboard {
     public String Type;

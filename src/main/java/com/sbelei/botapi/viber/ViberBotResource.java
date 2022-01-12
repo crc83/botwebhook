@@ -1,8 +1,6 @@
-package com.sbelei;
+package com.sbelei.botapi.viber;
 
-import com.sbelei.viberbot.ViberBot;
-import com.sbelei.viberbot.ViberHttpClient;
-import com.sbelei.viberbot.request.incomingmessage.IncomingEvent;
+import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,14 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/viber")
-public class ViberWebHookController {
+public class ViberBotResource {
 
     private Queue<IncomingEvent> queue = new LinkedList<IncomingEvent>();
 
     @Autowired
     private ViberBot viberBot;
 
-    private static final Logger LOG = LoggerFactory.getLogger(ViberWebHookController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ViberBotResource.class);
     private static Map<String, String> knownUsers = new HashMap<>();
     private static Set<String> usersWeWaitForPhoneNumber = new HashSet<>();
 

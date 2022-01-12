@@ -1,9 +1,9 @@
-package com.sbelei.viberbot;
+package com.sbelei.botapi.viber;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbelei.viberbot.request.setwebhook.EventType;
-import com.sbelei.viberbot.request.setwebhook.SetWebhookRequest;
+import com.sbelei.botapi.viber.request.setwebhook.EventType;
+import com.sbelei.botapi.viber.request.setwebhook.SetWebhookRequest;
 import org.springframework.stereotype.Component;
 
 @Component

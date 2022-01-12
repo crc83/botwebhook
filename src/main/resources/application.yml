@@ -1,3 +1,6 @@
 viber:
-    bot_token: "4e62e3df9e27e005-a1e21b2f115d5ce6-9c6d1c2c36af58c8"
-#viber.bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
+    bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
+
+telegrambot:
+    name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
+    token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}

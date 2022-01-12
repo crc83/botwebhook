@@ -3,19 +3,18 @@ package com.sbelei;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbelei.viberbot.ViberConversationManager;
-import com.sbelei.viberbot.request.incomingmessage.IncomingEvent;
+import com.sbelei.botapi.common.LoggingInterceptor;
+import com.sbelei.botapi.viber.ViberConversationManager;
+import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * This class connects to endpoint at

@@ -1,6 +1,6 @@
-package com.sbelei.viberbot;
+package com.sbelei.botapi.viber;
 
-import com.sbelei.LoggingInterceptor;
+import com.sbelei.botapi.common.LoggingInterceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

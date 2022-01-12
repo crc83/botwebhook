@@ -1,4 +1,4 @@
-package com.sbelei.viberbot.request.setwebhook;
+package com.sbelei.botapi.viber.request.setwebhook;
 
 public class SetWebhookRequest {
 

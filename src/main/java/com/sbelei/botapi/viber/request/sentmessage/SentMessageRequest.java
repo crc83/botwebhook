@@ -1,4 +1,4 @@
-package com.sbelei.viberbot.request.sentmessage;
+package com.sbelei.botapi.viber.request.sentmessage;
 
 public class SentMessageRequest {
 

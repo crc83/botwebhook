@@ -1,4 +1,4 @@
-package com.sbelei.viberbot.request.incomingmessage;
+package com.sbelei.botapi.viber.request.incomingmessage;
 
 public class IncomingEvent {
 

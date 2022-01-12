@@ -1,4 +1,4 @@
-package com.sbelei;
+package com.sbelei.botapi.common;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;

@@ -1,6 +1,6 @@
-package com.sbelei.viberbot;
+package com.sbelei.botapi.viber;
 
-import com.sbelei.viberbot.request.incomingmessage.IncomingEvent;
+import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

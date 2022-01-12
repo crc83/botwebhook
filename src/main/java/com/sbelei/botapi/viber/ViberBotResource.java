@@ -94,16 +94,16 @@ public class ViberBotResource {
             IncomingEvent incomingMessage = incomingMessageOptional.get();
 
             LOG.info("Received incoming event:" + incomingMessage.toString());
-            if (!"message".equals(incomingMessage.getEvent())) {
-                return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.getEvent());
+            if (!"message".equals(incomingMessage.event)) {
+                return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.event);
             }
-            String userId = incomingMessage.getSender().getId();
+            String userId = incomingMessage.sender.id;
             if (isUserKnown(userId)) {
                 //then handle regular conversation via commands
                 sendMessage(userId, "Your phone number is :" + knownUsers.get(userId));
             } else if (isUserAskedForPhoneNumber(userId)) {
-                if (isPhoneNumberValid(incomingMessage.getMessage().getText())) {
-                    saveUserPhoneNumber(userId, incomingMessage.getMessage().getText());
+                if (isPhoneNumberValid(incomingMessage.message.text)) {
+                    saveUserPhoneNumber(userId, incomingMessage.message.text);
                 } else {
                     sendMessage(userId, "Phone number is invalid, please try again");
                 }

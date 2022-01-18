@@ -1,6 +1,7 @@
 package com.sbelei.botapi.viber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sbelei.botapi.common.BotHandlerInterface;
 import com.sbelei.botapi.viber.request.buttons.Button;
 import com.sbelei.botapi.viber.request.buttons.Keyboard;
 import com.sbelei.botapi.viber.request.buttons.KeyboardRequest;
@@ -8,20 +9,9 @@ import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 
 import java.io.IOException;
 
-public class ViberConversationState {
+public class ViberBotHandler implements BotHandlerInterface {
 
-    enum ConversationStageEnum {
-        START,
-        PHONE_NUMBER_UNKNOWN,
-        PHONE_NUMBER_INVALID,
-        GET_ADDITIONAL_INFO,
-        GET_SCHEDULE_FOR_TODAY,
-        GET_SCHEDULE_FOR_TOMORROW,
-        GET_SCHEDULE_FOR_THIS_WEEK,
-        GET_SCHEDULE_FOR_NEXT_WEEK
-    }
 
-    private ConversationStageEnum state = ConversationStageEnum.START;
 
     private ObjectMapper mapper = new ObjectMapper();
     

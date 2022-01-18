@@ -22,8 +22,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated
 @RestController
-@RequestMapping("/viber")
+@RequestMapping("/${webhook_base}/viber")
 public class ViberBotResource {
 
     private Queue<IncomingEvent> queue = new LinkedList<IncomingEvent>();

@@ -1,3 +1,4 @@
+webhook_base: ${SCHEDULIFY_BOT_WEBHOOK}
 viber:
     bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
 

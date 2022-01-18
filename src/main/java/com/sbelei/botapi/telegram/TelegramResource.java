@@ -15,13 +15,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Optional;
 
+@Deprecated
 @RestController
-@RequestMapping("/telegram")
-public class TelegramBotResource {
+@RequestMapping("/${webhook_base}/telegram")
+public class TelegramResource {
 
     //https://github.com/pengrad/java-telegram-bot-api
 
-    private final Logger LOG = LoggerFactory.getLogger(TelegramBotResource.class);
+    private final Logger LOG = LoggerFactory.getLogger(TelegramResource.class);
 
     @Autowired
     SchedulifyTelegramBot telegramBot;
@@ -39,6 +40,7 @@ public class TelegramBotResource {
     public ResponseEntity<String> getTelegramBotStatus() throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText("Foobar");
+        sendMessage.setChatId("504734059");
         Message message = telegramBot.execute(sendMessage);
         return ResponseEntity.ok(message.getText());
     }

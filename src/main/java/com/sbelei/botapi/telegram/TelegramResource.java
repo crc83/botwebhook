@@ -25,7 +25,7 @@ public class TelegramResource {
     private final Logger LOG = LoggerFactory.getLogger(TelegramResource.class);
 
     @Autowired
-    SchedulifyTelegramBot telegramBot;
+    TelegramBot telegramBot;
 
     @GetMapping("/init")
     public ResponseEntity<String> setWebhook() throws TelegramApiException {

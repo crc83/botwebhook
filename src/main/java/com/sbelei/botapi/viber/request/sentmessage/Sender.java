@@ -2,22 +2,13 @@ package com.sbelei.botapi.viber.request.sentmessage;
 
 public class Sender {
 
-    private String name;
-    private String avatar;
+    public String name;
+    public String avatar;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Sender(String name, String avatar) {
+        super();
         this.name = name;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 }

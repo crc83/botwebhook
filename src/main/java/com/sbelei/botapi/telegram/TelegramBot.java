@@ -12,9 +12,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import javax.annotation.PostConstruct;
 
 @Component
-public class SchedulifyTelegramBot extends TelegramLongPollingBot {
+public class TelegramBot extends TelegramLongPollingBot {
 
-    private final Logger log = LoggerFactory.getLogger(SchedulifyTelegramBot.class);
+    private final Logger log = LoggerFactory.getLogger(TelegramBot.class);
 
     @Value("${telegrambot.name}")
     private String botName;
@@ -44,13 +44,13 @@ public class SchedulifyTelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         log.info("Come update");
-        try {
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
-            sendMessage.setText("hi");
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            log.error(e.getMessage(), e);
-        }
+//        try {
+//            SendMessage sendMessage = new SendMessage();
+//            sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
+//            sendMessage.setText("hi");
+//            execute(sendMessage);
+//        } catch (TelegramApiException e) {
+//            log.error(e.getMessage(), e);
+//        }
     }
 }

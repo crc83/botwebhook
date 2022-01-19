@@ -29,34 +29,12 @@ public class ViberBotResource {
 
     private Queue<IncomingEvent> queue = new LinkedList<IncomingEvent>();
 
-    @Autowired
-    private ViberBot viberBot;
-
     private static final Logger LOG = LoggerFactory.getLogger(ViberBotResource.class);
     private static Map<String, String> knownUsers = new HashMap<>();
     private static Set<String> usersWeWaitForPhoneNumber = new HashSet<>();
 
     @Autowired
     private ViberHttpClient viberHttpClient;
-
-    @GetMapping("/reregister")
-    public ResponseEntity<String> reRegister() {
-        String response;
-        try {
-            response = registerViberBot();
-        } catch (Exception e) {
-            e.printStackTrace();
-            response = "Error";
-        }
-        return ResponseEntity.ok(response);
-    }
-
-    private String registerViberBot() throws IOException {
-        return viberHttpClient.post("https://chatapi.viber.com/pa/set_webhook",
-                viberBot.setWebhookUrl("https://bots.schedulify.com.ua/viber/proxy"));
-//                viberBot.setWebhookUrl("https://bots.schedulify.com.ua/viber/receive"));
-    }
-
 
     @RequestMapping("/proxy")
     public ResponseEntity<String> proxy(@RequestBody Optional<IncomingEvent> incomingMessageOptional) {
@@ -82,62 +60,6 @@ public class ViberBotResource {
     @PostMapping("/send_message")
     public ResponseEntity<String> sentMessage(@RequestBody String body) throws IOException {
         return ResponseEntity.ok(viberHttpClient.post("https://chatapi.viber.com/pa/send_message", body));
-    }
-    //rewrite it
-    @RequestMapping("/receive")
-    public ResponseEntity<String> handleIncomingMessage(@RequestBody Optional<IncomingEvent> incomingMessageOptional)  {
-        try {
-            if (incomingMessageOptional.isEmpty()) {
-                LOG.info("No incoming content");
-                return ResponseEntity.ok("No incoming content");
-            }
-
-            IncomingEvent incomingMessage = incomingMessageOptional.get();
-
-            LOG.info("Received incoming event:" + incomingMessage.toString());
-            if (!"message".equals(incomingMessage.event)) {
-                return ResponseEntity.ok("Incoming event ignored:" + incomingMessage.event);
-            }
-            String userId = incomingMessage.sender.id;
-            if (isUserKnown(userId)) {
-                //then handle regular conversation via commands
-                sendMessage(userId, "Your phone number is :" + knownUsers.get(userId));
-            } else if (isUserAskedForPhoneNumber(userId)) {
-                if (isPhoneNumberValid(incomingMessage.message.text)) {
-                    saveUserPhoneNumber(userId, incomingMessage.message.text);
-                } else {
-                    sendMessage(userId, "Phone number is invalid, please try again");
-                }
-            } else {
-                sendMessage(userId, "Nice to meet you first time here");
-                sendMessage(userId, "To get most of the platform, please sent us your phone number you use during registration in a next message");
-                setUserAskedForPhoneNumber(userId);
-            }
-            return ResponseEntity.ok("Incoming message parsed");
-        } catch (Exception e) {
-            LOG.error("Unexpected error", e);
-            return ResponseEntity.ok("Error:" + e.getMessage());
-        }
-    }
-
-    private void saveUserPhoneNumber(String userId, String phoneNumber) {
-        knownUsers.put(userId, phoneNumber);
-    }
-
-    private void setUserAskedForPhoneNumber(String userId) {
-        usersWeWaitForPhoneNumber.add(userId);
-    }
-
-    private boolean isUserAskedForPhoneNumber(String userId) {
-        return usersWeWaitForPhoneNumber.contains(userId);
-    }
-
-    private void sendMessage(String userId, String message) throws IOException {
-        viberHttpClient.post("https://chatapi.viber.com/pa/send_message",viberBot.sendTextMessage(userId, message));
-    }
-
-    private boolean isUserKnown(String viberUserId) {
-        return knownUsers.containsKey(viberUserId);
     }
 
     private boolean isPhoneNumberValid(String possiblePhoneNumber) {

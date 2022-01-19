@@ -2,10 +2,10 @@ package com.sbelei.botapi.viber.request.sentmessage;
 
 public class SentMessageRequest {
 
-    private String userId;
-    private int min_api_version;
-    private Sender sender;
-    private String tracking_data;
-    private String type;
-    private String text;
+    public String receiver;
+    public int min_api_version;
+    public Sender sender;
+    public String tracking_data;
+    public String type;
+    public String text;
 }

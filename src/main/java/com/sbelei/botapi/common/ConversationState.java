@@ -29,7 +29,7 @@ public class ConversationState {
     public void accept(Object input) {
         switch (state) {
             case USER_HELLO:
-                botHandler.sendMessage(INTRO_MESSAGE);
+                botHandler.sendMessage(userId, INTRO_MESSAGE);
                 if (appHelper.isUserRegistered(userId, botHandler.getBotType())) {
                     botAsksForAction();
                 } else {
@@ -39,16 +39,16 @@ public class ConversationState {
 
             case USER_RESPONDED_TO_ASK_CONTACT:
                 if (!appHelper.isPhoneNumberValid(input)) {
-                    botHandler.sendMessage(PHONE_NUMBER_IS_INVALID);
+                    botHandler.sendMessage(userId, PHONE_NUMBER_IS_INVALID);
                     botAsksContact();
                 }
                 String phoneNumber = botHandler.getPhoneNumber(input);
                 if (!appHelper.phoneNumberIsKnown(phoneNumber)) {
-                    botHandler.sendMessage(NO_USER_WITH_THIS_PHONE_NUMBER);
+                    botHandler.sendMessage(userId, NO_USER_WITH_THIS_PHONE_NUMBER);
                     botAsksContact();
                 }
                 if (appHelper.getBotRegisteredForPhone(phoneNumber, botHandler.getBotType()) != null) {
-                    botHandler.sendMessage(THERE_IS_MESSENGER_REGISTERED_FOR_THIS);
+                    botHandler.sendMessage(userId, THERE_IS_MESSENGER_REGISTERED_FOR_THIS);
                     botAsksContact();
                 }
                 appHelper.saveContact(phoneNumber, userId, botHandler.getBotType());
@@ -62,14 +62,14 @@ public class ConversationState {
     }
 
     private void botAsksForAction() {
-        botHandler.sendMessage(WHAT_TO_SHOW_YOU);
+        botHandler.sendMessage(userId, WHAT_TO_SHOW_YOU);
         botHandler.send4SchedulesKeyboard();
         state = ConvStage.USER_RESPONDED_FOR_ACTION;
     }
 
     private void botAsksContact() {
-        botHandler.sendMessage(ASK_PHONE_NUMBER_MESSAGE);
-        botHandler.sendShareContactKeyboard();
+        botHandler.sendMessage(userId, ASK_PHONE_NUMBER_MESSAGE);
+        botHandler.sendShareContactKeyboard(userId);
         state = ConvStage.USER_RESPONDED_TO_ASK_CONTACT;
     }
 

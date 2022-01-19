@@ -5,6 +5,8 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
 
 @Component
 public class ViberHttpClient {
+
+    Logger LOG = LoggerFactory.getLogger(ViberHttpClient.class);
 
     @Value("${viber.bot_token}")
     private String viberBotTokenId;
@@ -22,7 +26,9 @@ public class ViberHttpClient {
             .addInterceptor(new LoggingInterceptor())
             .build();
 
-    public String post(String url, String json) throws IOException {
+    public String post(String url, String json) {
+        String result = "error";
+
         okhttp3.RequestBody body = okhttp3.RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)
@@ -31,14 +37,15 @@ public class ViberHttpClient {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             if ((response.body() != null)) {
-                return response.body().string();
+                result = response.body().string();
             } else {
-                return "";
+                result = "";
             }
+        } catch (IOException e) {
+            //TODO SB: implement cirquit braker
+            LOG.error("Error sending request to viber server", e);
+            result = e.getMessage();
         }
-    }
-
-    public String send_message(String json) throws IOException {
-        return post("https://chatapi.viber.com/pa/send_message", json);
+        return result;
     }
 }

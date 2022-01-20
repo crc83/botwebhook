@@ -6,7 +6,6 @@ import com.sbelei.botapi.common.BotHandlerInterface;
 import com.sbelei.botapi.viber.request.buttons.Button;
 import com.sbelei.botapi.viber.request.buttons.Keyboard;
 import com.sbelei.botapi.viber.request.buttons.KeyboardRequest;
-import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import com.sbelei.botapi.viber.request.sentmessage.Sender;
 import com.sbelei.botapi.viber.request.sentmessage.SentMessageRequest;
 import com.sbelei.botapi.viber.request.setwebhook.EventType;
@@ -15,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class ViberBotHandler implements BotHandlerInterface {

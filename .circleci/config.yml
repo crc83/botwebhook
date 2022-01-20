@@ -48,4 +48,4 @@ jobs:
       - run:
           name: Deploy docker image to GCP
           command:
-            gcloud run deploy botwebhook --image=gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$TAG --allow-unauthenticated --timeout=3600 --memory=512Mi --platform=managed --region=${GOOGLE_COMPUTE_REGION} --project=${GOOGLE_PROJECT_ID} --min-instances=1 --max-instances=1 --port=8080  --set-secrets=SCHEDULIFY_VIBER_BOT_TOKEN=SCHEDULIFY_TEST_VIBER_BOT_TOKEN:latest,SCHEDULIFY_TELEGRAM_BOT_NAME=SCHEDULIFY_TEST_TELEGRAM_BOT_NAME:latest,SCHEDULIFY_TELEGRAM_BOT_TOKEN=SCHEDULIFY_TEST_TELEGRAM_BOT_TOKEN:latest
+            gcloud run deploy botwebhook --image=gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$TAG --allow-unauthenticated --timeout=3600 --memory=512Mi --platform=managed --region=${GOOGLE_COMPUTE_REGION} --project=${GOOGLE_PROJECT_ID} --min-instances=1 --max-instances=1 --port=8080  --set-secrets=SCHEDULIFY_VIBER_BOT_TOKEN=SCHEDULIFY_TEST_VIBER_BOT_TOKEN:latest,SCHEDULIFY_TELEGRAM_BOT_NAME=SCHEDULIFY_TEST_TELEGRAM_BOT_NAME:latest,SCHEDULIFY_TELEGRAM_BOT_TOKEN=SCHEDULIFY_TEST_TELEGRAM_BOT_TOKEN:latest,SCHEDULIFY_BOT_WEBHOOK=SCHEDULIFY_TEST_BOT_WEBHOOK:latest

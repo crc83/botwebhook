@@ -6,6 +6,7 @@ import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,10 +33,13 @@ public class WebhookEndpointsController {
 
     private Queue<IncomingEvent> viberQueue = new LinkedList<IncomingEvent>();
 
+    @Value( "${webhook_base}" )
+    private String webhookBase;
+
     @PostConstruct
     public void init() {
-        viberBot.setWebhook("https://bots.schedulify.com/${webhook_base}/viber");
-        telegramBot.setWebhook("https://bots.schedulify.com.ua/${webhook_base}/telegram");
+        viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber");
+        telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
     }
 
     @RequestMapping("/viber")

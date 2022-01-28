@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;

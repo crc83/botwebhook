@@ -33,6 +33,7 @@ dependencies {
 
 	compileOnly group: 'org.zalando', name: 'logbook-api', version: '2.4.1'
 	runtimeOnly group: 'org.zalando', name: 'logbook-spring-boot-starter', version: '2.4.1'
+	testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 }
 
 test {

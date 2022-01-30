@@ -21,7 +21,7 @@ import java.util.Queue;
 
 @RestController
 @RequestMapping("/${webhook_base}")
-public class WebhookEndpointsController {
+public class BotController {
 
     @Autowired
     private ViberBotHandler viberBot;
@@ -29,11 +29,11 @@ public class WebhookEndpointsController {
     @Autowired
     private TelegramBotHandler telegramBot;
 
-    private static final Logger LOG = LoggerFactory.getLogger(WebhookEndpointsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BotController.class);
 
     private Queue<IncomingEvent> viberQueue = new LinkedList<IncomingEvent>();
 
-    @Value( "${webhook_base}" )
+    @Value( "$ {webhook_base}" )
     private String webhookBase;
 
     @PostConstruct
@@ -56,12 +56,12 @@ public class WebhookEndpointsController {
 
     @GetMapping("/initviber")
     public ResponseEntity<String> setWebhookViber() {
-        return ResponseEntity.ok(viberBot.setWebhook("https://bots.schedulify.com/${webhook_base}/viber"));
+        return ResponseEntity.ok(viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber"));
     }
 
     @GetMapping("/inittelegram")
     public ResponseEntity<String> setWebhookTelegram() throws TelegramApiException {
-        telegramBot.setWebhook("https://bots.schedulify.com.ua/${webhook_base}/telegram");
+        telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
         return ResponseEntity.ok("ok");
     }
 

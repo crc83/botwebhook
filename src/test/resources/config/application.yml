@@ -1,5 +1,4 @@
-botapi:
-    webhook_base: ${SCHEDULIFY_BOT_WEBHOOK}
+webhook_base: "testurl"
 viber:
     bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
 

@@ -23,8 +23,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Deprecated
-@RestController
-@RequestMapping("/${webhook_base}/viber")
 public class ViberBotResource {
 
     private Queue<IncomingEvent> queue = new LinkedList<IncomingEvent>();
@@ -36,7 +34,6 @@ public class ViberBotResource {
     @Autowired
     private ViberHttpClient viberHttpClient;
 
-    @RequestMapping("/proxy")
     public ResponseEntity<String> proxy(@RequestBody Optional<IncomingEvent> incomingMessageOptional) {
         if (incomingMessageOptional.isEmpty()) {
             LOG.info("No incoming content");
@@ -48,7 +45,6 @@ public class ViberBotResource {
         return ResponseEntity.ok("saved");
     }
 
-    @GetMapping("/getevent")
     public ResponseEntity<IncomingEvent> getEvent() {
         if (queue.isEmpty()) {
             return ResponseEntity.of(Optional.empty());
@@ -57,7 +53,6 @@ public class ViberBotResource {
         }
     }
 
-    @PostMapping("/send_message")
     public ResponseEntity<String> sentMessage(@RequestBody String body) throws IOException {
         return ResponseEntity.ok(viberHttpClient.post("https://chatapi.viber.com/pa/send_message", body));
     }
@@ -68,7 +63,6 @@ public class ViberBotResource {
         return matcher.matches();
     }
 
-    @RequestMapping("/defaultrecieve")
     public ResponseEntity<String> receive() {
         //lets parse request to see if we can get
         return ResponseEntity.ok("ok");

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedList;
@@ -20,7 +19,7 @@ import java.util.Optional;
 import java.util.Queue;
 
 @RestController
-@RequestMapping("/${webhook_base}")
+@RequestMapping("/${botapi.webhook_base}")
 public class BotController {
 
     @Autowired
@@ -33,7 +32,7 @@ public class BotController {
 
     private Queue<IncomingEvent> viberQueue = new LinkedList<IncomingEvent>();
 
-    @Value( "$ {webhook_base}" )
+    @Value( "${botapi.webhook_base}" )
     private String webhookBase;
 
     @PostConstruct
@@ -60,7 +59,7 @@ public class BotController {
     }
 
     @GetMapping("/inittelegram")
-    public ResponseEntity<String> setWebhookTelegram() throws TelegramApiException {
+    public ResponseEntity<String> setWebhookTelegram() {
         telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
         return ResponseEntity.ok("ok");
     }

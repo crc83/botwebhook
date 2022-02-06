@@ -17,7 +17,7 @@ public class ViberHttpClient {
 
     Logger LOG = LoggerFactory.getLogger(ViberHttpClient.class);
 
-    @Value("${viber.bot_token}")
+    @Value("${botapi.viber.bot_token}")
     private String viberBotTokenId;
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");

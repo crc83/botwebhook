@@ -1,7 +1,12 @@
-webhook_base: "testurl"
-viber:
-    bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
+wiremock:
+    server:
+        port: 0
+botapi:
+    webhook_base: "testurl"
+    viber:
+        bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
 
-telegrambot:
-    name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
-    token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}
+    telegrambot:
+        server_url: http://localhost:${wiremock.server.port}
+        name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
+        token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}

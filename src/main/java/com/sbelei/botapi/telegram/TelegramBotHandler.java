@@ -5,29 +5,27 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Deprecated
 @Component
 public class TelegramBotHandler implements BotHandlerInterface {
 
     private static final Log LOG = LogFactory.getLog(TelegramBotHandler.class);
 
-    @Autowired
-    private TelegramBot telegram;
+//    @Autowired
+//    private TelegramBot telegram;
 
     @Override
     public void sendMessage(String userId, String message) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(message);
-        sendMessage.setChatId(userId);
-        try {
-            telegram.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            //TODO SB: Implement cirqiut braker
-            LOG.error(e.getMessage(), e);
-        }
+//        SendMessage sendMessage = new SendMessage();
+//        sendMessage.setText(message);
+//        sendMessage.setChatId(userId);
+//        try {
+//            telegram.execute(sendMessage);
+//        } catch (TelegramApiException e) {
+//            //TODO SB: Implement cirqiut braker
+//            LOG.error(e.getMessage(), e);
+//        }
     }
 
     @Override
@@ -56,13 +54,17 @@ public class TelegramBotHandler implements BotHandlerInterface {
     }
 
     public void setWebhook(String url) {
-        try {
-            SetWebhook request = new SetWebhook();
-            request.setUrl(url);
-            LOG.info("Registring callback" + telegram.execute(request));
-        } catch (TelegramApiException e) {
-            //TODO SB : Implement cirquit braker
-            LOG.error("Registring telegram bot failed", e);
-        }
+
+//        try {
+////            WebhookInfo webhookInfo = telegram.getWebhookInfo();
+////            WebhookUtils.clearWebhook(telegram);
+////            LOG.info("Existing webhook:" + webhookInfo);
+//            SetWebhook request = new SetWebhook();
+//            request.setUrl(url);
+//            LOG.info("Registring callback" + telegram.execute(request));
+//        } catch (TelegramApiException e) {
+//            //TODO SB : Implement cirquit braker
+//            LOG.error("Registring telegram bot failed", e);
+//        }
     }
 }

@@ -1,8 +1,9 @@
 botapi:
     webhook_base: ${SCHEDULIFY_BOT_WEBHOOK}
-viber:
-    bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
+    viber:
+        bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
 
-telegrambot:
-    name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
-    token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}
+    telegrambot:
+        server_url: https://api.telegram.org
+        name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
+        token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}

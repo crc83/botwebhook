@@ -4,48 +4,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Optional;
 
 @Deprecated
 @RestController
-@RequestMapping("/${webhook_base}/telegram")
 public class TelegramResource {
-
-    //https://github.com/pengrad/java-telegram-bot-api
 
     private final Logger LOG = LoggerFactory.getLogger(TelegramResource.class);
 
-    @Autowired
-    TelegramBot telegramBot;
-
-    @GetMapping("/init")
-    public ResponseEntity<String> setWebhook() throws TelegramApiException {
-        SetWebhook request = new SetWebhook();
-        request.setUrl("https://bots.schedulify.com.ua/telegram/proxy");
-
-        LOG.info("Registring callback" + telegramBot.execute(request));
+    public ResponseEntity<String> setWebhook() {
+//        SetWebhook request = new SetWebhook();
+//        request.setUrl("https://bots.schedulify.com.ua/telegram/proxy");
+//
+//        LOG.info("Registring callback" + telegramBot.execute(request));
         return ResponseEntity.ok("ok");
     }
 
-    @GetMapping("/getstatus")
-    public ResponseEntity<String> getTelegramBotStatus() throws TelegramApiException {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText("Foobar");
-        sendMessage.setChatId("504734059");
-        Message message = telegramBot.execute(sendMessage);
-        return ResponseEntity.ok(message.getText());
+    public ResponseEntity<String> getTelegramBotStatus()  {
+//        SendMessage sendMessage = new SendMessage();
+//        sendMessage.setText("Foobar");
+//        sendMessage.setChatId("504734059");
+//        Message message = telegramBot.execute(sendMessage);
+        return ResponseEntity.ok("fubar");//message.getText());
     }
 
-    @RequestMapping("/proxy")
     public ResponseEntity<String> proxy(@RequestBody Optional<Object> requestBodyOptional) {
         if (requestBodyOptional.isPresent()) {
             LOG.info("incoming request:" + requestBodyOptional.get().toString());

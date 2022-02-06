@@ -1,0 +1,21 @@
+{
+  "id" : "96cb56af-2e00-4cfa-8f61-bbac4ca415cb",
+  "name" : "bot5060887338aahds4xlhvry_hr0oljiihjonpovxktztbq_deletewebhook",
+  "request" : {
+    "url" : "/bot5060887338:AAHDs4xLhvrY_Hr0oLjiIhJoNpoVXkTzTbQ/deleteWebhook",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"ok\":true,\"result\":true,\"description\":\"Webhook was deleted\"}",
+    "headers" : {
+      "Server" : "nginx/1.18.0",
+      "Date" : "Tue, 01 Feb 2022 13:56:11 GMT",
+      "Content-Type" : "application/json",
+      "Strict-Transport-Security" : "max-age=31536000; includeSubDomains; preload"
+    }
+  },
+  "uuid" : "96cb56af-2e00-4cfa-8f61-bbac4ca415cb",
+  "persistent" : true,
+  "insertionIndex" : 6
+}

@@ -3,6 +3,7 @@ package com.sbelei.botapi.viber;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sbelei.botapi.common.BotHandlerInterface;
+import com.sbelei.botapi.common.CommonObjectMapper;
 import com.sbelei.botapi.viber.request.buttons.Button;
 import com.sbelei.botapi.viber.request.buttons.Keyboard;
 import com.sbelei.botapi.viber.request.buttons.KeyboardRequest;
@@ -23,7 +24,7 @@ public class ViberBotHandler implements BotHandlerInterface {
     @Autowired
     private ViberHttpClient viberHttpClient;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private CommonObjectMapper mapper = new CommonObjectMapper();
 
     @Override
     public void sendMessage(String userId, String message) {
@@ -35,7 +36,7 @@ public class ViberBotHandler implements BotHandlerInterface {
         sendMessage.type = "text";
         sendMessage.text = message;
 
-        viberHttpClient.post("https://chatapi.viber.com/pa/send_message", toJson(sendMessage));
+        viberHttpClient.post("https://chatapi.viber.com/pa/send_message", mapper.toJson(sendMessage));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class ViberBotHandler implements BotHandlerInterface {
         keyboardRequest.receiver = userId;
         keyboardRequest.text = "Надішліть свій номер в форматі 38ХХХХХХХХХХ або натисніть 'Надіслати номер' ";
 
-        viberHttpClient.post("https://chatapi.viber.com/pa/send_message", toJson(keyboardRequest));
+        viberHttpClient.post("https://chatapi.viber.com/pa/send_message", mapper.toJson(keyboardRequest));
     }
 
     public String setWebhook(String url) {
@@ -88,19 +89,7 @@ public class ViberBotHandler implements BotHandlerInterface {
         request.send_name = true;
         request.send_photo = true;
 
-        return viberHttpClient.post("https://chatapi.viber.com/pa/set_webhook", toJson(request));
+        return viberHttpClient.post("https://chatapi.viber.com/pa/set_webhook", mapper.toJson(request));
     }
 
-    private String toJson(Object object) {
-        try {
-            return mapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            if (object != null) {
-                LOG.error("Error processing json for object:" + object.toString(), e);
-            } else {
-                LOG.error("Error processing json null", e);
-            }
-        }
-        return "";
-    }
 }

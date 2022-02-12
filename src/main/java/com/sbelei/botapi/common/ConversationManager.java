@@ -1,6 +1,6 @@
 package com.sbelei.botapi.common;
 
-import com.sbelei.botapi.telegram.TelegramBotHandler;
+import com.sbelei.botapi.telegram.TelegramHttpClient;
 import com.sbelei.botapi.viber.ViberBotHandler;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class ConversationManager {
     public void recieveTelegramMessage(String userId, Object input) {
         String conversationId = ConversationType.telegram+userId;
         if (!conversations.containsKey(conversationId)) {
-            conversations.put(conversationId, new ConversationState(userId, new TelegramBotHandler()));
+            conversations.put(conversationId, new ConversationState(userId, new TelegramHttpClient()));
         }
         handleIncomingMessage(conversationId, input);
     }

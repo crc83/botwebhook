@@ -8,5 +8,7 @@ botapi:
 
     telegrambot:
         server_url: http://localhost:${wiremock.server.port}
-        name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
-        token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}
+        #        server_url: https://api.telegram.org
+        #        server_url: http://localhost:8080
+        name: local test bot
+        token: TEST_BOT_ID:TEST_BOT_TOKEN

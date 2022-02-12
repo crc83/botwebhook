@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface BotHandlerInterface {
 
-    void sendMessage(String userId, String message);
+    void sendMessage(String userId, String message) throws Exception;
 
     String getBotType();
 

@@ -1,0 +1,12 @@
+wiremock:
+    server:
+        port: 0
+botapi:
+    webhook_base: "testurl"
+    viber:
+        bot_token: ${SCHEDULIFY_VIBER_BOT_TOKEN}
+
+    telegrambot:
+        server_url: https://api.telegram.org
+        name: ${SCHEDULIFY_TELEGRAM_BOT_NAME}
+        token: ${SCHEDULIFY_TELEGRAM_BOT_TOKEN}

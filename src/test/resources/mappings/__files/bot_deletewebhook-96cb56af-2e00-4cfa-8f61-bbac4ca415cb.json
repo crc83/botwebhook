@@ -1,8 +1,8 @@
 {
   "id" : "96cb56af-2e00-4cfa-8f61-bbac4ca415cb",
-  "name" : "bot5060887338aahds4xlhvry_hr0oljiihjonpovxktztbq_deletewebhook",
+  "name" : "bot_deletewebhook",
   "request" : {
-    "url" : "/bot5060887338:AAHDs4xLhvrY_Hr0oLjiIhJoNpoVXkTzTbQ/deleteWebhook",
+    "url" : "/botTEST_BOT_ID:TEST_BOT_TOKEN/deleteWebhook",
     "method" : "POST"
   },
   "response" : {

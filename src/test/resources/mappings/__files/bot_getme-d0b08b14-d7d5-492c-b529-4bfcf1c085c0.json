@@ -1,8 +1,8 @@
 {
   "id" : "d0b08b14-d7d5-492c-b529-4bfcf1c085c0",
-  "name" : "bot5060887338aahds4xlhvry_hr0oljiihjonpovxktztbq_getme",
+  "name" : "bot_getme",
   "request" : {
-    "url" : "/bot5060887338:AAHDs4xLhvrY_Hr0oLjiIhJoNpoVXkTzTbQ/getMe",
+    "url" : "/botTEST_BOT_ID:TEST_BOT_TOKEN/getMe",
     "method" : "POST"
   },
   "response" : {

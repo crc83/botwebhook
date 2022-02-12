@@ -1,6 +1,6 @@
 package com.sbelei.botapi.common;
 
-import com.sbelei.botapi.telegram.TelegramBotHandler;
+import com.sbelei.botapi.telegram.TelegramHttpClient;
 import com.sbelei.botapi.viber.ViberBotHandler;
 import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class BotController {
     private ViberBotHandler viberBot;
 
     @Autowired
-    private TelegramBotHandler telegramBot;
+    private TelegramHttpClient telegramBot;
 
     private static final Logger LOG = LoggerFactory.getLogger(BotController.class);
 

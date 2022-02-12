@@ -1,0 +1,21 @@
+{
+  "id" : "d124195a-2f9b-4564-b51e-081bc941d899",
+  "name" : "bot_getupdates",
+  "request" : {
+    "url" : "/botTEST_BOT_ID:TEST_BOT_TOKEN/getUpdates",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"ok\":true,\"result\":[{\"update_id\":88062605,\n\"message\":{\"message_id\":42,\"from\":{\"id\":504734059,\"is_bot\":false,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"language_code\":\"uk\"},\"chat\":{\"id\":504734059,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"type\":\"private\"},\"date\":1644346432,\"text\":\"Hello message\"}},{\"update_id\":88062606,\n\"message\":{\"message_id\":43,\"from\":{\"id\":504734059,\"is_bot\":false,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"language_code\":\"uk\"},\"chat\":{\"id\":504734059,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"type\":\"private\"},\"date\":1644346558,\"text\":\"Hello\"}},{\"update_id\":88062607,\n\"message\":{\"message_id\":44,\"from\":{\"id\":504734059,\"is_bot\":false,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"language_code\":\"uk\"},\"chat\":{\"id\":504734059,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"type\":\"private\"},\"date\":1644346564,\"text\":\"Second message\"}}]}",
+    "headers" : {
+      "Server" : "nginx/1.18.0",
+      "Date" : "Tue, 08 Feb 2022 18:58:19 GMT",
+      "Content-Type" : "application/json",
+      "Strict-Transport-Security" : "max-age=31536000; includeSubDomains; preload"
+    }
+  },
+  "uuid" : "d124195a-2f9b-4564-b51e-081bc941d899",
+  "persistent" : true,
+  "insertionIndex" : 10
+}

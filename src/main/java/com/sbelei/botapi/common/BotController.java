@@ -37,8 +37,8 @@ public class BotController {
 
     @PostConstruct
     public void init() {
-        viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber");
-        telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
+//        viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber");
+//        telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
     }
 
     @RequestMapping("/viber")

@@ -5,5 +5,5 @@ import com.sbelei.botapi.telegram.responce.common.Message;
 public class SendMessageResponse {
 
     public boolean ok;
-    public Message response;
+    public Message result;
 }

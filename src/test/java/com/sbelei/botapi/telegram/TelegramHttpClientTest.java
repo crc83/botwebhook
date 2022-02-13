@@ -51,6 +51,7 @@ class TelegramHttpClientTest {
 
     @Test
     void testSendMessage() throws Exception{
+        //in case of error, method throws exceptions
         client.sendMessage("504734059", "Hello world");
     }
 }

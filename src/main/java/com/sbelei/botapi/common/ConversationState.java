@@ -26,7 +26,7 @@ public class ConversationState {
         this.botHandler = botHandler;
     }
 
-    public void accept(Object input) {
+    public void accept(Object input) throws Exception {
         switch (state) {
             case USER_HELLO:
                 botHandler.sendMessage(userId, INTRO_MESSAGE);
@@ -61,13 +61,13 @@ public class ConversationState {
         }
     }
 
-    private void botAsksForAction() {
+    private void botAsksForAction() throws Exception {
         botHandler.sendMessage(userId, WHAT_TO_SHOW_YOU);
         botHandler.send4SchedulesKeyboard();
         state = ConvStage.USER_RESPONDED_FOR_ACTION;
     }
 
-    private void botAsksContact() {
+    private void botAsksContact() throws Exception {
         botHandler.sendMessage(userId, ASK_PHONE_NUMBER_MESSAGE);
         botHandler.sendShareContactKeyboard(userId);
         state = ConvStage.USER_RESPONDED_TO_ASK_CONTACT;

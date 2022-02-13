@@ -5,7 +5,7 @@ package com.sbelei.botapi.telegram.responce.common;
  * https://core.telegram.org/bots/api#user
  */
 public class User {
-    public int id;                                  // 	Integer 	Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
+    public String id;                                  // 	Integer 	Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
     public boolean is_bot;                          // 	Boolean 	True, if this user is a bot
     public String first_name;                       // 	String 	User's or bot's first name
     public String last_name;                        // 	String 	Optional. User's or bot's last name

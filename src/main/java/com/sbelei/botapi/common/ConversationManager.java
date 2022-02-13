@@ -2,6 +2,8 @@ package com.sbelei.botapi.common;
 
 import com.sbelei.botapi.telegram.TelegramHttpClient;
 import com.sbelei.botapi.viber.ViberBotHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -9,6 +11,8 @@ import java.util.Map;
 
 @Component
 public class ConversationManager {
+
+    private Logger LOG = LoggerFactory.getLogger(ConversationManager.class);
 
     enum ConversationType {
         viber,
@@ -36,6 +40,10 @@ public class ConversationManager {
 
     public void handleIncomingMessage(String conversationId, Object input) {
         ConversationState conversation = conversations.get(conversationId);
-        conversation.accept(input);
+        try {
+            conversation.accept(input);
+        } catch (Exception e) {
+            LOG.warn("Error handling message by bot:" + e.getMessage(), e);
+        }
     }
 }

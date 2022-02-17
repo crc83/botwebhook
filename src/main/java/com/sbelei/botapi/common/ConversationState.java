@@ -20,7 +20,7 @@ public class ConversationState {
     private String userId;
     private ConvStage state = ConvStage.USER_HELLO;
     private BotHandlerInterface botHandler;
-    private AppHelperInterface appHelper; // <- this is door to our application world (maybe put it to botHandler???)
+    private AppHelperInterface appHelper = new StubAppHelper(); // <- this is door to our application world (maybe put it to botHandler???)
 
 
     public ConversationState(String userId, BotHandlerInterface botHandler) {

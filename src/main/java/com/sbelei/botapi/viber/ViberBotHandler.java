@@ -1,7 +1,5 @@
 package com.sbelei.botapi.viber;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sbelei.botapi.common.BotHandlerInterface;
 import com.sbelei.botapi.common.CommonObjectMapper;
 import com.sbelei.botapi.viber.request.buttons.Button;
@@ -60,16 +58,16 @@ public class ViberBotHandler implements BotHandlerInterface {
     }
 
     @Override
-    public void sendShareContactKeyboard(String userId) {
+    public void sendShareContactKeyboard(String userId, String message, String shareContactButtonCaption) {
         Button button = new Button();
         button.ActionType = "share-phone";
-        button.Text = "Надіслати мій номер";
+        button.Text = shareContactButtonCaption;
         button.TextSize = "regular";
 
         KeyboardRequest keyboardRequest = new KeyboardRequest();
         keyboardRequest.keyboard = new Keyboard(button);
         keyboardRequest.receiver = userId;
-        keyboardRequest.text = "Надішліть свій номер в форматі 38ХХХХХХХХХХ або натисніть 'Надіслати номер' ";
+        keyboardRequest.text = message;
 
         viberHttpClient.post("https://chatapi.viber.com/pa/send_message", mapper.toJson(keyboardRequest));
     }

@@ -1,5 +1,7 @@
 package com.sbelei.botapi.telegram.request;
 
+import java.util.Optional;
+
 /**
  * Shortened (not full) send message request is taken from here
  * https://core.telegram.org/bots/api#sendmessage
@@ -15,5 +17,5 @@ public class SendMessageRequest {
 //    public boolean protect_content;              // 	Boolean 	Optional 	Protects the contents of the sent message from forwarding and saving
 //    public int reply_to_message_id;                 // 	Integer 	Optional 	If the message is a reply, ID of the original message
 //    public boolean allow_sending_without_reply;     // 	Boolean 	Optional 	Pass True, if the message should be sent even if the specified replied-to message is not found
-//    public String reply_markup;                 // 	InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply 	Optional 	Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
+    public BaseKeyboardMarkup reply_markup;                 // 	InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply 	Optional 	Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.
 }

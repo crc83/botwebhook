@@ -2,8 +2,6 @@ package com.sbelei.botapi.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.io.IOException;
-
 public interface BotHandlerInterface {
 
     void sendMessage(String userId, String message) throws Exception;
@@ -16,5 +14,5 @@ public interface BotHandlerInterface {
 
     void send4SchedulesKeyboard();
 
-    void sendShareContactKeyboard(String userId);
+    void sendShareContactKeyboard(String userId, String message, String shareContactButtonCaption) throws JsonProcessingException;
 }

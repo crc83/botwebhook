@@ -54,4 +54,11 @@ class TelegramHttpClientTest {
         //in case of error, method throws exceptions
         client.sendMessage("504734059", "Hello world");
     }
+
+
+    @Test
+    void testSendShareContactKeyboard() throws Exception{
+        //in case of error, method throws exceptions
+        client.sendShareContactKeyboard("504734059", "Please share your contact", "Press me");
+    }
 }

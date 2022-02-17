@@ -5,6 +5,8 @@ import com.jayway.jsonpath.JsonPath;
 import com.sbelei.botapi.common.BotHandlerInterface;
 import com.sbelei.botapi.common.CommonObjectMapper;
 import com.sbelei.botapi.common.LoggingInterceptor;
+import com.sbelei.botapi.telegram.request.KeyboardButton;
+import com.sbelei.botapi.telegram.request.ReplyKeyboardMarkup;
 import com.sbelei.botapi.telegram.request.SendMessageRequest;
 import com.sbelei.botapi.telegram.responce.SendMessageResponse;
 import com.sbelei.botapi.telegram.responce.getupdate.GetUpdateResponse;
@@ -82,6 +84,7 @@ public class TelegramHttpClient implements BotHandlerInterface {
         if (!response.ok) {
             LOG.error("Error sending telegram message");
             //TODO SB : Retry logic?
+            throw new RuntimeException("Error sending telegram message");
         }
     }
 
@@ -106,8 +109,29 @@ public class TelegramHttpClient implements BotHandlerInterface {
     }
 
     @Override
-    public void sendShareContactKeyboard(String userId) {
+    public void sendShareContactKeyboard(String userId, String message, String shareContactButtonCaption) throws JsonProcessingException {
+        SendMessageRequest sendMessageRequest =  new SendMessageRequest();
+        sendMessageRequest.chat_id = userId;//
+        sendMessageRequest.text = message;
 
+
+        KeyboardButton shareContactButton = new KeyboardButton();
+        shareContactButton.text = shareContactButtonCaption;
+        shareContactButton.request_contact = true;
+
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.resize_keyboard = true;
+        replyKeyboardMarkup.one_time_keyboard = true;
+        replyKeyboardMarkup.keyboard = new KeyboardButton[][]{ new KeyboardButton[]{shareContactButton}};
+
+
+        sendMessageRequest.reply_markup = replyKeyboardMarkup;
+        SendMessageResponse response = mapper.readValue( post("sendMessage", mapper.toJson(sendMessageRequest)), SendMessageResponse.class);
+        if (!response.ok) {
+            LOG.error("Error sending telegram message");
+            //TODO SB : Retry logic?
+            throw new RuntimeException("Error sending telegram message");
+        }
     }
 
     /**

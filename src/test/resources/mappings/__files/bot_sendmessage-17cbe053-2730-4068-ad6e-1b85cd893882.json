@@ -1,0 +1,26 @@
+{
+  "id" : "17cbe053-2730-4068-ad6e-1b85cd893882",
+  "name" : "bot-sendmessage",
+  "request" : {
+    "url" : "/botTEST_BOT_ID:TEST_BOT_TOKEN/sendMessage",
+    "method" : "POST",
+    "bodyPatterns" : [ {
+      "equalToJson" : "{\"chat_id\":\"504734059\",\"text\":\"Please share your contact\",\"reply_markup\":{\"keyboard\":[[{\"text\":\"Press me\",\"request_contact\":true}]],\"resize_keyboard\":true,\"one_time_keyboard\":true}}",
+      "ignoreArrayOrder" : true,
+      "ignoreExtraElements" : true
+    } ]
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"ok\":true,\"result\":{\"message_id\":53,\"from\":{\"id\":5060887338,\"is_bot\":true,\"first_name\":\"schedulify\",\"username\":\"SchedulifyComUaBot\"},\"chat\":{\"id\":504734059,\"first_name\":\"\\u0421\\u0435\\u0440\\u0433\\u0456\\u0439\",\"last_name\":\"\\u0411\\u0435\\u043b\\u0435\\u0439\",\"username\":\"crc83\",\"type\":\"private\"},\"date\":1645128744,\"text\":\"Please share your contact\"}}",
+    "headers" : {
+      "Server" : "nginx/1.18.0",
+      "Date" : "Thu, 17 Feb 2022 20:12:24 GMT",
+      "Content-Type" : "application/json",
+      "Strict-Transport-Security" : "max-age=31536000; includeSubDomains; preload"
+    }
+  },
+  "uuid" : "17cbe053-2730-4068-ad6e-1b85cd893882",
+  "persistent" : true,
+  "insertionIndex" : 11
+}

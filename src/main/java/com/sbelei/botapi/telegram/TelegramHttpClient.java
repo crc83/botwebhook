@@ -95,7 +95,10 @@ public class TelegramHttpClient implements BotHandlerInterface {
 
     @Override
     public String getPhoneNumber(Object input) {
-        return null;
+        Update[] actual = (Update[]) input;
+        Update message = actual[0];
+
+        return message.message.contact.phone_number;
     }
 
     @Override

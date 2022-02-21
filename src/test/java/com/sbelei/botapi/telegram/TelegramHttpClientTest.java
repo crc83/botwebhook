@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@ActiveProfiles("proxy")
+@ActiveProfiles("proxy")
 @SpringBootTest
 @AutoConfigureWireMock
 class TelegramHttpClientTest {

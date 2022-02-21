@@ -71,6 +71,7 @@ public class TelegramHttpClient implements BotHandlerInterface {
         } catch (IOException e) {
             //TODO SB: implement cirquit braker
             LOG.error("Error sending request to telegram server", e);
+            throw new RuntimeException(e);
         }
         return result;
     }

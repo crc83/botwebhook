@@ -1,6 +1,7 @@
 package com.sbelei.botapi.common;
 
 import com.sbelei.botapi.telegram.TelegramHttpClient;
+import com.sbelei.botapi.telegram.responce.getupdate.Update;
 import com.sbelei.botapi.viber.ViberBotHandler;
 import com.sbelei.botapi.viber.request.incomingmessage.IncomingEvent;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class BotController {
     @Autowired
     private TelegramHttpClient telegramBot;
 
+    @Autowired
+    private ConversationManager conversationManager;
+
     private static final Logger LOG = LoggerFactory.getLogger(BotController.class);
 
     private Queue<IncomingEvent> viberQueue = new LinkedList<IncomingEvent>();
@@ -37,8 +41,8 @@ public class BotController {
 
     @PostConstruct
     public void init() {
-//        viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber");
-//        telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
+    //    viberBot.setWebhook("https://bots.schedulify.com/"+webhookBase+"/viber");
+    //    telegramBot.setWebhook("https://bots.schedulify.com.ua/"+webhookBase+"/telegram");
     }
 
     @RequestMapping("/viber")
@@ -65,10 +69,17 @@ public class BotController {
     }
 
     @RequestMapping("/telegram")
-    public ResponseEntity<String> telegram(@RequestBody Optional<Object> requestBodyOptional) {
+    public ResponseEntity<String> telegram(@RequestBody Optional<Update> requestBodyOptional) {
         if (requestBodyOptional.isPresent()) {
             LOG.debug("incoming request:" + requestBodyOptional.get().toString());
+            try {
+                conversationManager.recieveTelegramMessage(requestBodyOptional.get());
+            } catch (Exception e) {
+                LOG.error("Error in telegram endpoint", e);
+                return ResponseEntity.ok("error");
+            }
         }
+
         return ResponseEntity.ok("ok");
     }
 }

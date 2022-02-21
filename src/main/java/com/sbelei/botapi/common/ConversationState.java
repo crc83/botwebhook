@@ -2,14 +2,14 @@ package com.sbelei.botapi.common;
 
 public class ConversationState {
 
-    private static final String INTRO_MESSAGE = "Nice to meet you first time here";
+    public static final String INTRO_MESSAGE = "Nice to meet you first time here";
     private static final String PHONE_NUMBER_IS_INVALID = "Phone number is invalid\nPlease try again";
     private static final String NO_USER_WITH_THIS_PHONE_NUMBER = "There is no user with this phone number in system\nI can't register you";
     private static final String THERE_IS_MESSENGER_REGISTERED_FOR_THIS = "The user for chatbot is already registered for his number";
-    private static final String ASK_PHONE_NUMBER_MESSAGE = "To get most of the platform, please sent us your phone number you use during registration in a next message\nOr press 'Share contact'";
+    public static final String ASK_PHONE_NUMBER_MESSAGE = "To get most of the platform, please sent us your phone number you use during registration in a next message\nOr press 'Share contact'";
     //"Надішліть свій номер в форматі 38ХХХХХХХХХХ або натисніть 'Надіслати номер' "
     private static final String WHAT_TO_SHOW_YOU = "Please choose what to show you";
-    private static final String SHARE_CONTACT_BUTTON_CAPTION = "Share phone number";//"Надіслати мій номер"
+    public static final String SHARE_CONTACT_BUTTON_CAPTION = "Share phone number";//"Надіслати мій номер"
 
     enum ConvStage {
         USER_HELLO,

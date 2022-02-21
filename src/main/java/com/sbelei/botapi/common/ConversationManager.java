@@ -1,13 +1,17 @@
 package com.sbelei.botapi.common;
 
 import com.sbelei.botapi.telegram.TelegramHttpClient;
+import com.sbelei.botapi.telegram.responce.getupdate.Update;
 import com.sbelei.botapi.viber.ViberBotHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.sbelei.botapi.common.ConversationManager.ConversationType.viber;
 
 @Component
 public class ConversationManager {
@@ -19,31 +23,46 @@ public class ConversationManager {
         telegram
     }
 
+    private TelegramHttpClient telegramBot;
+
+    private ViberBotHandler viberBot;
+
+    @Autowired
+    public ConversationManager(ViberBotHandler viberBot, TelegramHttpClient telegramBot) {
+        this.viberBot = viberBot;
+        this.telegramBot = telegramBot;
+    }
+
     Map<String, ConversationState> conversations = new HashMap<>();
 
-    public void recieveViberMessage(String userId, Object input) {
-        String conversationId = ConversationType.viber+userId;
+    public void recieveViberMessage(String userId, Object input) throws Exception {
+        String conversationId = viber+userId;
         if (!conversations.containsKey(conversationId)) {
-            conversations.put(conversationId, new ConversationState(userId, new ViberBotHandler()));
+            conversations.put(conversationId, new ConversationState(userId, newViberBotHandler()));
         }
         handleIncomingMessage(conversationId, input);
 
     }
 
-    public void recieveTelegramMessage(String userId, Object input) {
+    private ViberBotHandler newViberBotHandler() {
+        return viberBot;
+    }
+
+    public void recieveTelegramMessage(Update input) throws Exception {
+        String userId = input.message.from.id;
         String conversationId = ConversationType.telegram+userId;
         if (!conversations.containsKey(conversationId)) {
-            conversations.put(conversationId, new ConversationState(userId, new TelegramHttpClient()));
+            conversations.put(conversationId, new ConversationState(userId, newTelegramBotHandler()));
         }
         handleIncomingMessage(conversationId, input);
     }
 
-    public void handleIncomingMessage(String conversationId, Object input) {
+    private TelegramHttpClient newTelegramBotHandler() {
+        return telegramBot;
+    }
+
+    public void handleIncomingMessage(String conversationId, Object input) throws Exception {
         ConversationState conversation = conversations.get(conversationId);
-        try {
-            conversation.accept(input);
-        } catch (Exception e) {
-            LOG.warn("Error handling message by bot:" + e.getMessage(), e);
-        }
+        conversation.accept(input);
     }
 }
